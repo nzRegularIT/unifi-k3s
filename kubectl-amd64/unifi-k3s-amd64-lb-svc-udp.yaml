@@ -7,19 +7,19 @@ metadata:
     metallb.universe.tf/allow-shared-ip: unifi-lb-shared-ip
 spec:
   ports:
-  - name: stun-service
+  - name: stun
     protocol: UDP
     port: 3478
     targetPort: 3478
-  - name: remote-syslog
+  - name: syslog
     protocol: UDP
     port: 5514
     targetPort: 5514
-  - name: device-discovery
+  - name: discovery
     protocol: UDP
     port: 10001
     targetPort: 10001
-  - name: controller-discoverable-l2
+  - name: layer2
     protocol: UDP
     port: 1900
     targetPort: 1900

@@ -7,19 +7,19 @@ metadata:
     metallb.universe.tf/allow-shared-ip: unifi-lb-shared-ip
 spec:
   ports:
-  - name: gui-service-https
+  - name: gui-https
     port: 8443
     targetPort: 8443
-  - name: controller-service
+  - name: controller
     port: 8080
     targetPort: 8080
-  - name: captive-portal-https
+  - name: captive-https
     port: 8843
     targetPort: 8843
-  - name: captive-portal-http
+  - name: captive-http
     port: 8880
     targetPort: 8880
-  - name: mobile-speed-test
+  - name: speed-test
     port: 6789
     targetPort: 6789
   selector:
