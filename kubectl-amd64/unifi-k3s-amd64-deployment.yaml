@@ -1,30 +1,30 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: unifi-controller
+  name: unifi-controller
 spec:
-  replicas: 1
+  replicas: 1
   selector:
     matchLabels:
-      app: unifi-controller
+      app: unifi-controller
   strategy:
-    type: Recreate
+    type: Recreate
   template:
     metadata:
       labels:
-        app: unifi-controller
+        app: unifi-controller
     spec:
       containers:
-      - env:
-        image: linuxserver/unifi-controller:amd64-latest
-        imagePullPolicy: Always
+      - env:
+        image: linuxserver/unifi-controller:amd64-latest
+        imagePullPolicy: Always
         name: unifi-controller
         ports:
-        - containerPort: 8443
+        - containerPort: 8443
         volumeMounts:
-          - mountPath: /unifi
-            name: unifi-config
+          - mountPath: /unifi
+            name: unifi-config
       volumes:
-      - name: unifi-config
+      - name: unifi-config
         hostPath:
-          path: /unifi
+          path: /unifi
