@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Ubuntu 18.04 LTS
+
 #hostname="RPi-UniFi"
 #timeZone="Pacific/Auckland"
 #sudo hostnamectl --static set-hostname $hostname
@@ -35,9 +38,6 @@ git config --global credential.helper 'cache --timeout=3600'
 
 # Install k3s
 curl -sfL https://get.k3s.io | sudo sh -s - --disable traefik,servicelb --write-kubeconfig-mode 644
-
-# Temp workaround for k3s.yaml readability for helm to work
-#sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 
 # Confirm k3s status
 systemctl status k3s
@@ -76,9 +76,15 @@ EOF
 sudo k3s kubectl create namespace unifi-controller
 
 # Install Unifi Controller - testing
-helm install unifi ./unifi
-sudo k3s kubectl get all --all-namespaces
-sudo k3s kubectl describe pods unifi-69c789d9f7-mxskz -n unifi-controller
+cd ~
+git clone https://github.com/nzRegularIT/unifi-k3s.git
+cd ~/unifi-k3s
+sudo k3s kubectl apply -f ./kubectl-amd64/unifi-k3s-amd64-deployment.yaml
+
+
+#helm install unifi ./unifi
+#sudo k3s kubectl get all --all-namespaces
+#sudo k3s kubectl describe pods unifi-69c789d9f7-mxskz -n unifi-controller
 
 # The following are for testing only
 : '
