@@ -2,3 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: unifi-controller
+  namespace: unifi
+spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: unifi-controller
+      strategy:
+        type: Recreate
+      template:
+        metadata:
+          labels:
+            app: unifi-controller
+        spec:
+              containers:
+              - env:
+                image: linuxserver/unifi-controller:amd64-latest
+                imagePullPolicy: Always
+                name: unifi-controller
