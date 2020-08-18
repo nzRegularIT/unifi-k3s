@@ -3,7 +3,7 @@ hostname="RPi-UniFi"
 timeZone="Pacific/Auckland"
 sudo hostnamectl --static set-hostname $hostname
 sudo timedatectl set-timezone $timeZone
-sudo mkdir /unifi
+#sudo mkdir /unifi
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
