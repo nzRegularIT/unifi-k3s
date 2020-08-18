@@ -10,3 +10,4 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: local-path-retain-policy
+  volumeName: pvc-098133cd-c722-4e9f-bbd3-8fb155ff2db3
