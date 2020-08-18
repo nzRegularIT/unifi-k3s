@@ -20,3 +20,9 @@ spec:
                 image: linuxserver/unifi-controller:amd64-latest
                 imagePullPolicy: Always
                 name: unifi-controller
+                ports:
+                  - containerPort: 8443
+                volumes:
+                  - name: unifi-config
+                    hostPath:
+                      path: /unifi
