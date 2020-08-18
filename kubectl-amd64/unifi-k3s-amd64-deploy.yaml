@@ -25,7 +25,6 @@ spec:
         - containerPort: 8843
         - containerPort: 8880
         - containerPort: 6789
-        - containerPort: 5514
         volumeMounts:
           - mountPath: /unifi
             name: unifi-config
