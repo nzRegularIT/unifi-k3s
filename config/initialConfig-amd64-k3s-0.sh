@@ -6,13 +6,15 @@
 #timeZone="Pacific/Auckland"
 #sudo hostnamectl --static set-hostname $hostname
 #sudo timedatectl set-timezone $timeZone
-sudo mkdir /unifi
+#sudo mkdir /unifi
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-sudo apt install redis-tools git -y
+sudo apt install net-tools git -y
 
-# Git config
+# Git config requires VS Code helper installed
+#git config --global user.email "you@example.com"
+#git config --global user.name "Your Name"
 git config --global user.name ''
 git config --global user.email ''
 git config --global credential.helper 'cache --timeout=3600'
@@ -88,6 +90,8 @@ sudo k3s kubectl apply -f ./kubectl-amd64/unifi-k3s-amd64-deployment.yaml
 
 # The following are for testing only
 : '
+sudo apt install redis-tools -y
+
 # Install Kubernetes Dashboard https://rancher.com/docs/k3s/latest/en/installation/kube-dashboard/
 GITHUB_URL=https://github.com/kubernetes/dashboard/releases
 VERSION_KUBE_DASHBOARD=$(curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||')

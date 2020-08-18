@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Ubuntu 18.04 LTS
+
 hostname="RPi-UniFi"
 timeZone="Pacific/Auckland"
 sudo hostnamectl --static set-hostname $hostname
@@ -7,9 +10,8 @@ sudo timedatectl set-timezone $timeZone
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-sudo apt install net-tools redis-tools -y
+sudo apt install net-tools git -y
 
-# Git config
 # Git config requires VS Code helper installed
 #git config --global user.email "you@example.com"
 #git config --global user.name "Your Name"
@@ -34,10 +36,10 @@ echo gpu_mem_1024=16 | sudo tee -a /boot/firmware/usercfg.txt
 sudo reboot
 
 # Install k3s
-curl -sfL https://get.k3s.io | sudo sh -s - --disable traefik,servicelb
+curl -sfL https://get.k3s.io | sudo sh -s - --disable traefik,servicelb  --write-kubeconfig-mode 644
 
 # Temp workaround for k3s.yaml readability for helm to work
-sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+#sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 
 # Confirm k3s status
 systemctl status k3s
@@ -82,6 +84,8 @@ sudo k3s kubectl describe pods -n unifi-controller unifi-69c789d9f7-mxskz
 
 # The following are for testing only
 : '
+sudo apt install redis-tools -y
+
 # Install Kubernetes Dashboard https://rancher.com/docs/k3s/latest/en/installation/kube-dashboard/
 GITHUB_URL=https://github.com/kubernetes/dashboard/releases
 VERSION_KUBE_DASHBOARD=$(curl -w '%{url_effective}' -I -L -s -S ${GITHUB_URL}/latest -o /dev/null | sed -e 's|.*/||')
