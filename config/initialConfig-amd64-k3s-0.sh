@@ -73,7 +73,7 @@ data:
 EOF
 
 # Create Unifi Controller Namespace
-sudo k3s kubectl create namespace unifi-controller
+sudo k3s kubectl create namespace unifi
 
 # Install Unifi Controller - testing
 cd ~
