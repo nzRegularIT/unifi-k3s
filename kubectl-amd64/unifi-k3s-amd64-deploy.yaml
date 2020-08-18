@@ -21,6 +21,11 @@ spec:
         name: unifi-controller
         ports:
         - containerPort: 8443
+        - containerPort: 8080
+        - containerPort: 8843
+        - containerPort: 8880
+        - containerPort: 6789
+        - containerPort: 5514
         volumeMounts:
           - mountPath: /unifi
             name: unifi-config
