@@ -27,9 +27,19 @@ spec:
         - containerPort: 8880
         - containerPort: 6789
         volumeMounts:
-          - mountPath: /unifi
-            name: unifi-config
+          - mountPath: /unifi/data
+            name: unifi-data
+            subPath: data
+          - mountPath: /unifi/log
+            name: unifi-data
+            subPath: log
+          - mountPath: /unifi/cert
+            name: unifi-data
+            subPath: cert
+          - mountPath: /unifi/init.d
+            name: unifi-data
+            subPath: init.d
       volumes:
-      - name: unifi-config
-        hostPath:
-          path: /unifi
+      - name: unifi-data
+        persistentVolumeClaim:
+          claimName: unifi
