@@ -81,6 +81,9 @@ EOF
 sudo k3s kubectl create namespace unifi
 
 # Install Unifi Controller - testing
+cd ~
+git clone https://github.com/nzRegularIT/unifi-k3s.git
+cd ~/unifi-k3s
 sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-namespace.yaml
 sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-pvc.yaml
 sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-deploy.yaml
