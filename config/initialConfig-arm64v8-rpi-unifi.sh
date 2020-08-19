@@ -41,6 +41,9 @@ curl -sfL https://get.k3s.io | sudo sh -s - --disable traefik,servicelb  --write
 # Temp workaround for k3s.yaml readability for helm to work
 #sudo chmod 644 /etc/rancher/k3s/k3s.yaml
 
+# Wait 5 minutes for k3s to run initial startup
+
+
 # Confirm k3s status
 systemctl status k3s
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -75,12 +78,19 @@ data:
 EOF
 
 # Create Unifi Controller Namespace
-sudo k3s kubectl create namespace unifi-controller
+sudo k3s kubectl create namespace unifi
 
 # Install Unifi Controller - testing
-helm install unifi ./unifi
-sudo k3s kubectl get all --all-namespaces
-sudo k3s kubectl describe pods -n unifi-controller unifi-69c789d9f7-mxskz 
+sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-namespace.yaml
+sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-pvc.yaml
+sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-deploy.yaml
+sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-lb-svc-tcp.yaml
+sudo k3s kubectl apply -f ./kubectl-arm64v8/unifi-k3s-arm64v8-lb-svc-udp.yaml
+
+
+#helm install unifi ./unifi
+#sudo k3s kubectl get all --all-namespaces
+#sudo k3s kubectl describe pods -n unifi-controller unifi-69c789d9f7-mxskz 
 
 # The following are for testing only
 : '
