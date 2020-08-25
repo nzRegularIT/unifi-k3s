@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Ubuntu 18.04 LTS
+# RPi Ubuntu 18.04 LTS
 
-hostname="RPi-UniFi"
+hostname="RPi-ks3"
 timeZone="Pacific/Auckland"
 sudo hostnamectl --static set-hostname $hostname
 sudo timedatectl set-timezone $timeZone
@@ -36,7 +36,7 @@ echo gpu_mem_1024=16 | sudo tee -a /boot/firmware/usercfg.txt
 sudo reboot
 
 # Install k3s
-curl -sfL https://get.k3s.io | sudo sh -s - --disable traefik,servicelb  --write-kubeconfig-mode 644
+curl -sfL https://get.k3s.io | sudo sh -s - --disable servicelb --write-kubeconfig-mode 644
 
 # Temp workaround for k3s.yaml readability for helm to work
 #sudo chmod 644 /etc/rancher/k3s/k3s.yaml
